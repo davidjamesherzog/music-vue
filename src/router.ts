@@ -1,6 +1,8 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Home from './views/Home.vue';
+import LatestMusic from '@/components/LatestMusic.vue';
+import Music from '@/components/Music.vue';
+import SearchMusic from '@/components/SearchMusic.vue';
 
 Vue.use(Router);
 
@@ -10,16 +12,20 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: Home,
+      name: 'LatestMusic',
+      component: LatestMusic,
     },
     {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/About.vue'),
+      path: '/music/:id',
+      name: 'Music',
+      props: true,
+      component: Music
     },
-  ],
+    {
+      path: '/search/:name',
+      name: 'SearchMusic',
+      props: true,
+      component: SearchMusic
+    }
+  ]
 });
