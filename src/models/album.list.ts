@@ -1,6 +1,11 @@
 import { Type } from './type';
 
-export interface AlbumList {
-  resultCount: number;
-  results: Type[];
+export class AlbumList {
+  public resultCount: number;
+  public results: Type[];
+
+  constructor() {
+    this.resultCount = 0;
+    this.results = [];
+  }
 }

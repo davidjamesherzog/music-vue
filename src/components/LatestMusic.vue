@@ -17,30 +17,9 @@
         v-for="(item, index) in albums"
         :key="index"
         mb-2>
-        <v-card>
-          <v-img
-            :src="item.artworkUrl100"
-            aspect-ratio="1"
-          ></v-img>
 
-          <v-card-title primary-title>
-            <div>
-              <h2>{{item.artistName}}</h2>
-              <div>Title: {{item.collectionName}}</div>
-              <div>Date: {{item.releaseDate.substring(0,4)}}</div>
-              <div>Genre: {{item.primaryGenreName}}</div>
-              <div>Tracks: {{item.trackCount - 1}}</div>
-            </div>
-          </v-card-title>
-
-          <v-card-actions class="justify-center">
-            <v-btn flat
-              color="green"
-              @click="singleMusic(item.collectionId)"
-              >View</v-btn>
-          </v-card-actions>
-
-        </v-card>
+        <album-card :item="item"></album-card>
+        
       </v-flex>
   </v-layout>
   </v-container>
@@ -50,17 +29,16 @@
 import { Component, Vue, Prop } from 'vue-property-decorator';
 import { AlbumList } from '../models/album.list';
 import { Type } from '../models/type';
+import AlbumCard from './AlbumCard.vue';
 
 @Component({
-  name: 'LatestMusic'
+  name: 'LatestMusic',
+  components: {
+    AlbumCard
+  }
 })
-// import movieApi from '@/services/MovieApi';
 export default class LatestMusic extends Vue {
-  private albums: any = null;
-  /* private albums: AlbumList = {
-    resultCount: 0,
-    results: []
-  }; */
+  private albums!: Type[];
   private loading: boolean = true;
 
   public mounted() {

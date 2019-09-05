@@ -1,4 +1,78 @@
-export interface Type {
+export class Type {
+  public wrapperType: string;
+  public kind: string;
+  public collectionType: string;
+  public artistId: number;
+  public collectionId: number;
+  public trackId: number;
+  public amgArtistId: number;
+  public artistName: string;
+  public collectionName: string;
+  public trackName: string;
+  public collectionCensorName: string;
+  public trackCensorName: string;
+  public artistViewUrl: string;
+  public collectionViewUrl: string;
+  public trackViewUrl: string;
+  public previewUrl: string;
+  public artworkUrl30: string;
+  public artworkUrl60: string;
+  public artworkUrl100: string;
+  public collectionPrice: number;
+  public trackPrice: number;
+  public collectionExplicitness: string;
+  public trackExplicitness: string;
+  public discCount: number;
+  public discNumber: number;
+  public trackCount: number;
+  public trackNumber: number;
+  public trackTimeMillis: number;
+  public copyright: string;
+  public country: string;
+  public currency: string;
+  public releaseDate: string;
+  public primaryGenreName: string;
+  public radioStationUrl: string;
+
+  constructor() {
+    this.wrapperType = '';
+    this.kind = '';
+    this.collectionType = '';
+    this.artistId = 0;
+    this.collectionId = 0;
+    this.trackId = 0;
+    this.amgArtistId = 0;
+    this.artistName = '';
+    this.collectionName = '';
+    this.trackName = '';
+    this.collectionCensorName = '';
+    this.trackCensorName = '';
+    this.artistViewUrl = '';
+    this.collectionViewUrl = '';
+    this.trackViewUrl = '';
+    this.previewUrl = '';
+    this.artworkUrl30 = '';
+    this.artworkUrl60 = '';
+    this.artworkUrl100 = '';
+    this.collectionPrice = 0;
+    this.trackPrice = 0;
+    this.collectionExplicitness = '';
+    this.trackExplicitness = '';
+    this.discCount = 0;
+    this.discNumber = 0;
+    this.trackCount = 0;
+    this.trackNumber = 0;
+    this.trackTimeMillis = 0;
+    this.copyright = '';
+    this.country = '';
+    this.currency = '';
+    this.releaseDate = '';
+    this.primaryGenreName = '';
+    this.radioStationUrl = '';
+  }
+}
+
+/* export interface Type {
   wrapperType: string;
   kind: string;
   collectionType: string;
@@ -33,4 +107,4 @@ export interface Type {
   releaseDate: string;
   primaryGenreName: string;
   radioStationUrl: string;
-}
+} */

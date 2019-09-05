@@ -55,6 +55,7 @@
 <script lang="ts">
 import { Component, Vue, Prop, Watch } from 'vue-property-decorator';
 import { AlbumList } from '../models/album.list';
+import { Type } from '../models/type';
 
 @Component({
   name: 'SearchMusic'
@@ -66,7 +67,7 @@ export default class SearchMusic extends Vue {
   private name!: string;
 
   // variables
-  private albums: any = null;
+  private albums!: Type[];
   private loading: boolean = true;
   private noData: boolean = false;
 
@@ -75,7 +76,7 @@ export default class SearchMusic extends Vue {
   }
 
   public fetchResult(value: string) {
-    this.albums = null;
+    //this.albums = null;
     fetch(`https://itunes.apple.com/search?term=${value}&entity=album`)
       .then((response: any) => {
         return response.json();
@@ -91,13 +92,13 @@ export default class SearchMusic extends Vue {
       });
   }
 
-  public mounted () {
+  public mounted() {
     console.log('SearchMusic mounted');
     this.fetchResult(this.name);
   }
 
   @Watch('name')
-  onNameChanged(val: string, oldVal: string) {
+  public onNameChanged(val: string, oldVal: string) {
     this.fetchResult(val);
   }
 

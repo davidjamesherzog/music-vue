@@ -58,6 +58,7 @@
 <script lang='ts'>
 import { Component, Vue, Prop } from 'vue-property-decorator';
 import { AlbumDetails } from '../models/album.details';
+import { Type } from '../models/type';
 
 @Component({
   name: 'Music'
@@ -69,8 +70,8 @@ export default class Music extends Vue {
   private id!: string;
 
   // variables
-  private album: any = {};
-  private songs: any = [];
+  private album!: Type;
+  private songs!: Type[];
   private loading: boolean = true;
 
   public mounted() {
