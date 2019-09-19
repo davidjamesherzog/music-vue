@@ -14,7 +14,7 @@
   <v-container v-else grid-list-xl>
     <v-layout wrap>
       <v-flex xs4
-        v-for="(item, index) in albums"
+        v-for="(item, index) in albumList.results"
         :key="index"
         mb-2>
 
@@ -27,6 +27,11 @@
 
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator';
+import {
+  State,
+  Mutation,
+  Action
+} from 'vuex-class';
 import { AlbumList } from '../models/album.list';
 import { Type } from '../models/type';
 import AlbumCard from './AlbumCard.vue';
@@ -38,19 +43,19 @@ import AlbumCard from './AlbumCard.vue';
   }
 })
 export default class LatestMusic extends Vue {
-  private albums!: Type[];
-  private loading: boolean = true;
+
+  @State private loading!: boolean;
+  @State private albumList!: AlbumList;
+  @Mutation private setSearch: any;
+  @Action private getAlbums: any;
+
+  // variables
+  // private loading: boolean = true;
 
   public mounted() {
-    console.log('LatestMusic mounted');
-    fetch('https://itunes.apple.com/search?term=Metallica&entity=album')
-      .then((response: any) => {
-        return response.json();
-      }).then((albumList: AlbumList) => {
-        console.log('parsed albumList', albumList);
-        this.albums = albumList.results;
-        this.loading = false;
-      });
+    // console.log('LatestMusic mounted');
+    this.setSearch('Metallica');
+    this.getAlbums('Metallica');
   }
 
   public singleMusic(id: number) {

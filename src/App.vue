@@ -43,7 +43,7 @@ export default class App extends Vue {
   private searchString: string = '';
 
   public searchMusic() {
-    console.log(`SEARCH MUSIC - ${this.searchString}`);
+    // console.log(`SEARCH MUSIC - ${this.searchString}`);
     this.$router.push('/search/' + this.searchString);
     this.searchString = '';
   }

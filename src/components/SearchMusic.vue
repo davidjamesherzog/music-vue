@@ -13,14 +13,14 @@
 
   <v-container v-else-if="noData">
     <div class="text-xs-center">
-    <h2>No Movie in API with {{this.name}}</h2>
+    <h2>No Music in API with {{this.name}}</h2>
     </div>
   </v-container>
 
   <v-container v-else grid-list-xl>
     <v-layout wrap>
       <v-flex xs4
-        v-for="(item, index) in albums"
+        v-for="(item, index) in albumList.results"
         :key="index"
         mb-2>
         <v-card>
@@ -53,6 +53,7 @@
 </template>
 
 <script lang="ts">
+import { State, Mutation, Action } from 'vuex-class';
 import { Component, Vue, Prop, Watch } from 'vue-property-decorator';
 import { AlbumList } from '../models/album.list';
 import { Type } from '../models/type';
@@ -66,9 +67,12 @@ export default class SearchMusic extends Vue {
   @Prop({type: String})
   private name!: string;
 
+  @State private loading!: boolean;
+  @State private albumList!: AlbumList;
+  @Mutation private setSearch: any;
+  @Action private getAlbums: any;
+
   // variables
-  private albums!: Type[];
-  private loading: boolean = true;
   private noData: boolean = false;
 
   public singleMusic(id: string) {
@@ -76,29 +80,26 @@ export default class SearchMusic extends Vue {
   }
 
   public fetchResult(value: string) {
-    //this.albums = null;
-    fetch(`https://itunes.apple.com/search?term=${value}&entity=album`)
-      .then((response: any) => {
-        return response.json();
-      }).then((albumList: AlbumList) => {
-        console.log('parsed albumList', albumList);
-        if (albumList.resultCount > 0) {
-          this.albums = albumList.results;
+    this.setSearch(value);
+    this.getAlbums(value)
+      .then(() => {
+        // console.log('parsed albumList', this.albumList);
+        if (this.albumList.resultCount > 0) {
           this.noData = false;
         } else {
           this.noData = true;
         }
-        this.loading = false;
       });
   }
 
   public mounted() {
-    console.log('SearchMusic mounted');
+    // console.log('SearchMusic mounted');
     this.fetchResult(this.name);
   }
 
   @Watch('name')
   public onNameChanged(val: string, oldVal: string) {
+    // console.log('SearchMusic watch');
     this.fetchResult(val);
   }
 
