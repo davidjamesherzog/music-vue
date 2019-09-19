@@ -34,7 +34,7 @@ import {
 } from 'vuex-class';
 import { AlbumList } from '../models/album.list';
 import { Type } from '../models/type';
-import AlbumCard from './AlbumCard.vue';
+import AlbumCard from '../components/AlbumCard.vue';
 
 @Component({
   name: 'LatestMusic',
@@ -50,7 +50,7 @@ export default class LatestMusic extends Vue {
   @Action private getAlbums: any;
 
   // variables
-  // private loading: boolean = true;
+  //private loading: boolean = true;
 
   public mounted() {
     // console.log('LatestMusic mounted');

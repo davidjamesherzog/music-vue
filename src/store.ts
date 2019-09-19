@@ -19,7 +19,7 @@ export default new Vuex.Store({
   getters: {
     getAlbum(state) {
       // console.log('getAlbum getter');
-      let album: Type = state.albumDetails.results.find((type: Type) => type.wrapperType === 'collection');
+      let album: Type = state.albumDetails.results.find((type: Type) => type.wrapperType === 'collection')!;
       if (!album) {
         album = new Type();
       }

@@ -1,8 +1,8 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import LatestMusic from '@/components/LatestMusic.vue';
-import Music from '@/components/Music.vue';
-import SearchMusic from '@/components/SearchMusic.vue';
+import LatestMusic from '@/views/LatestMusic.vue';
+import Music from '@/views/Music.vue';
+import SearchMusic from '@/views/SearchMusic.vue';
 
 Vue.use(Router);
 
