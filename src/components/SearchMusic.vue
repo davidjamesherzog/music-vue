@@ -69,7 +69,7 @@ export default class SearchMusic extends Vue {
 
   @State private loading!: boolean;
   @State private albumList!: AlbumList;
-  @Mutation private setSearch: any;
+  // @Mutation private setSearch: any;
   @Action private getAlbums: any;
 
   // variables
@@ -80,7 +80,7 @@ export default class SearchMusic extends Vue {
   }
 
   public fetchResult(value: string) {
-    this.setSearch(value);
+    // this.setSearch(value);
     this.getAlbums(value)
       .then(() => {
         // console.log('parsed albumList', this.albumList);

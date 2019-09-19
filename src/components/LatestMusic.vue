@@ -46,7 +46,7 @@ export default class LatestMusic extends Vue {
 
   @State private loading!: boolean;
   @State private albumList!: AlbumList;
-  @Mutation private setSearch: any;
+  // @Mutation private setSearch: any;
   @Action private getAlbums: any;
 
   // variables
@@ -54,7 +54,6 @@ export default class LatestMusic extends Vue {
 
   public mounted() {
     // console.log('LatestMusic mounted');
-    this.setSearch('Metallica');
     this.getAlbums('Metallica');
   }
 

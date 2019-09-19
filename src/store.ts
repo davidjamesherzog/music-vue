@@ -9,7 +9,8 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     loading: false,
-    search: 'Metallica',
+    search: '',
+    id: 0,
     albumList: new AlbumList(),
     albumDetails: new AlbumDetails(),
     album: new Array<Type>(),
@@ -35,6 +36,9 @@ export default new Vuex.Store({
     setSearch(state, search: string) {
       state.search = search;
     },
+    setId(state, id: number) {
+      state.id = id;
+    },
     setAlbumList(state, albumList: AlbumList) {
       state.albumList = albumList;
     },
@@ -49,9 +53,13 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    getAlbums({commit}, album: string) {
+    getAlbums({commit, state}, search: string) {
+      if (state.search === search) {
+        return;
+      }
+      commit('setSearch', search);
       commit('setLoading', true);
-      fetch(`https://itunes.apple.com/search?term=${album}&entity=album`)
+      fetch(`https://itunes.apple.com/search?term=${search}&entity=album`)
         .then((response: any) => {
           return response.json();
         }).then((albumList: AlbumList) => {
@@ -59,7 +67,11 @@ export default new Vuex.Store({
           commit('setLoading', false);
         });
     },
-    getAlbumDetails({commit}, id: string) {
+    getAlbumDetails({commit, state}, id: number) {
+      if (state.id === id) {
+        return;
+      }
+      commit('setId', id);
       commit('setLoading', true);
       fetch(`https://itunes.apple.com/lookup?id=${id}&entity=song`)
         .then((response: any) => {
