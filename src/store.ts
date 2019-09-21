@@ -44,12 +44,6 @@ export default new Vuex.Store({
     },
     setAlbumDetails(state, albumDetails: AlbumDetails) {
       state.albumDetails = albumDetails;
-    },
-    setAlbum(state, album: Type[]) {
-      state.album = album;
-    },
-    setSongs(state, songs: Type[]) {
-      state.songs = songs;
     }
   },
   actions: {
@@ -79,8 +73,6 @@ export default new Vuex.Store({
         }).then((albumDetails: AlbumDetails) => {
           // console.log(albumDetails);
           commit('setAlbumDetails', albumDetails);
-          commit('setAlbum', albumDetails.results[0]);
-          commit('setSongs', albumDetails.results);
           commit('setLoading', false);
         });
     }
