@@ -30,11 +30,14 @@ import { Component, Vue, Prop } from 'vue-property-decorator';
 import {
   State,
   Mutation,
-  Action
+  Action,
+  namespace
 } from 'vuex-class';
 import { AlbumList } from '../models/album.list';
 import { Type } from '../models/type';
 import AlbumCard from '../components/AlbumCard.vue';
+
+const musicModule = namespace('Music');
 
 @Component({
   name: 'LatestMusic',
@@ -44,13 +47,15 @@ import AlbumCard from '../components/AlbumCard.vue';
 })
 export default class LatestMusic extends Vue {
 
-  @State private loading!: boolean;
-  @State private albumList!: AlbumList;
-  // @Mutation private setSearch: any;
-  @Action private getAlbums: any;
+  @musicModule.State
+  private loading!: boolean;
+  @musicModule.State
+  private albumList!: AlbumList;
+  @musicModule.Action
+  private getAlbums: any;
 
   // variables
-  //private loading: boolean = true;
+  // private loading: boolean = true;
 
   public mounted() {
     // console.log('LatestMusic mounted');

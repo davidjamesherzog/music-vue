@@ -57,10 +57,13 @@ import { Component, Vue, Prop } from 'vue-property-decorator';
 import {
   State,
   Getter,
-  Action
+  Action,
+  namespace
 } from 'vuex-class';
 import { AlbumDetails } from '../models/album.details';
 import { Type } from '../models/type';
+
+const musicModule = namespace('Music');
 
 @Component({
   name: 'Music'
@@ -71,12 +74,14 @@ export default class Music extends Vue {
   @Prop({type: String})
   private id!: string;
 
-  // @State album!: Type[];
-  // @State songs!: Type[];
-  @State private loading!: boolean;
-  @Getter private getAlbum: any;
-  @Getter private getSongs: any;
-  @Action private getAlbumDetails: any;
+  @musicModule.State
+  private loading!: boolean;
+  @musicModule.Getter
+  private getAlbum: any;
+  @musicModule.Getter
+  private getSongs: any;
+  @musicModule.Action
+  private getAlbumDetails: any;
 
   public mounted() {
     // console.log('Music mounted');

@@ -53,10 +53,12 @@
 </template>
 
 <script lang="ts">
-import { State, Mutation, Action } from 'vuex-class';
+import { State, Mutation, Action, namespace } from 'vuex-class';
 import { Component, Vue, Prop, Watch } from 'vue-property-decorator';
 import { AlbumList } from '../models/album.list';
 import { Type } from '../models/type';
+
+const musicModule = namespace('Music');
 
 @Component({
   name: 'SearchMusic'
@@ -67,10 +69,12 @@ export default class SearchMusic extends Vue {
   @Prop({type: String})
   private name!: string;
 
-  @State private loading!: boolean;
-  @State private albumList!: AlbumList;
-  // @Mutation private setSearch: any;
-  @Action private getAlbums: any;
+  @musicModule.State
+  private loading!: boolean;
+  @musicModule.State
+  private albumList!: AlbumList;
+  @musicModule.Action
+  private getAlbums: any;
 
   // variables
   private noData: boolean = false;
