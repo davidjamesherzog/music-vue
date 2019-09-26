@@ -11,7 +11,7 @@
     </div>
   </v-container>
 
-  <v-container v-else-if="noData">
+  <v-container v-else-if="noResults">
     <div class="text-xs-center">
     <h2>No Music in API with {{this.name}}</h2>
     </div>
@@ -76,34 +76,28 @@ export default class SearchMusic extends Vue {
   @musicModule.Action
   private getAlbums: any;
 
-  // variables
-  private noData: boolean = false;
+  // computed
+  get noResults() {
+    return this.albumList.resultCount === 0;
+  }
 
+  // methods
   public singleMusic(id: string) {
     this.$router.push('/music/' + id);
   }
 
-  public fetchResult(value: string) {
-    // this.setSearch(value);
-    this.getAlbums(value)
-      .then(() => {
-        // console.log('parsed albumList', this.albumList);
-        if (this.albumList.resultCount > 0) {
-          this.noData = false;
-        } else {
-          this.noData = true;
-        }
-      });
+  public async fetchResult(value: string) {
+    await this.getAlbums(value);
   }
 
+  // lifecycle phases
   public mounted() {
-    // console.log('SearchMusic mounted');
     this.fetchResult(this.name);
   }
 
+  // watchers
   @Watch('name')
   public onNameChanged(val: string, oldVal: string) {
-    // console.log('SearchMusic watch');
     this.fetchResult(val);
   }
 

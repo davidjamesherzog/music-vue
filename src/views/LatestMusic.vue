@@ -54,11 +54,7 @@ export default class LatestMusic extends Vue {
   @musicModule.Action
   private getAlbums: any;
 
-  // variables
-  // private loading: boolean = true;
-
   public mounted() {
-    // console.log('LatestMusic mounted');
     this.getAlbums('Metallica');
   }
 

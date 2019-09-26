@@ -10,6 +10,12 @@
       </div>
   </v-container>
 
+  <v-container v-else-if="noResults">
+    <div class="text-xs-center">
+    <h2>No Music ID in API with {{this.id}}</h2>
+    </div>
+  </v-container>
+
   <v-container v-else>
     <v-layout wrap>
       <v-flex xs12 mr-1 ml-1>
@@ -83,9 +89,14 @@ export default class Music extends Vue {
   @musicModule.Action
   private getAlbumDetails: any;
 
-  public mounted() {
-    // console.log('Music mounted');
-    this.getAlbumDetails(this.id);
+  // computed
+  get noResults() {
+    return !this.getAlbum.artistName;
+  }
+
+  // lifecycle phases
+  public async mounted() {
+    await this.getAlbumDetails(this.id);
   }
 }
 </script>

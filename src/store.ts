@@ -29,7 +29,6 @@ class Music extends VuexModule {
 
   // getters
   get getAlbum(): Type {
-    // console.log('getAlbum getter');
     let album: Type = this.albumDetails.results.find((type: Type) => type.wrapperType === 'collection')!;
     if (!album) {
       album = new Type();
@@ -69,36 +68,29 @@ class Music extends VuexModule {
 
   // actions
   @Action
-  public getAlbums(search: string): Promise<void> {
+  public async getAlbums(search: string): Promise<void> {
     if (this.search === search) {
       return Promise.resolve();
     }
     this.setSearch(search);
     this.setLoading(true);
-    return fetch(`https://itunes.apple.com/search?term=${search}&entity=album`)
-      .then((response: any) => {
-        return response.json();
-      }).then((albumList: AlbumList) => {
-        this.setAlbumList(albumList);
-        this.setLoading(false);
-      });
+    const response: any = await fetch(`https://itunes.apple.com/search?term=${search}&entity=album`);
+    const albumList: AlbumList = await response.json();
+    this.setAlbumList(albumList);
+    this.setLoading(false);
   }
 
   @Action
-  public getAlbumDetails(id: number): Promise<void> {
+  public async getAlbumDetails(id: number): Promise<void> {
     if (this.id === id) {
       return Promise.resolve();
     }
     this.setId(id);
     this.setLoading(true);
-    return fetch(`https://itunes.apple.com/lookup?id=${id}&entity=song`)
-      .then((response: any) => {
-        return response.json();
-      }).then((albumDetails: AlbumDetails) => {
-        // console.log(albumDetails);
-        this.setAlbumDetails(albumDetails);
-        this.setLoading(false);
-      });
+    const response: any = await fetch(`https://itunes.apple.com/lookup?id=${id}&entity=song`);
+    const albumDetails: AlbumDetails = await response.json();
+    this.setAlbumDetails(albumDetails);
+    this.setLoading(false);
   }
 }
 
