@@ -1,5 +1,7 @@
 # music-vue
 
+This is an example vue.js and vuetify app using the iTunes API.  You may find a demo [here](https://davidjamesherzog.github.io/music-vue/).
+
 ## Project setup
 ```
 npm install
